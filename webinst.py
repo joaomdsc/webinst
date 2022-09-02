@@ -24,6 +24,7 @@ def webinst(app_name):
     print(f'Running pip install/freeze inside venv')
     r = run([p, '-m', 'pip', 'install', 'flask'], stdout=PIPE, stderr=STDOUT)
     r = run([p, '-m', 'pip', 'install', 'python-dotenv'], stdout=PIPE, stderr=STDOUT)
+    r = run([p, '-m', 'pip', 'install', 'flask-wtf'], stdout=PIPE, stderr=STDOUT)
 
 if __name__ == '__main__':
     # Command line argument
