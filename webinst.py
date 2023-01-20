@@ -6,10 +6,15 @@ from venv import EnvBuilder
 from shutil import copytree
 from subprocess import run, PIPE, STDOUT
 
-def webinst(app_name):
+def webinst(dst_path, app_name, rest=False):
+    # app_path is the directory that will hold the app
+    if not os.path.isdir(dst_path):
+        os.makedirs(dst_path)
+    app_path = os.path.join(dst_path, app_name)
+    
     # Copy skeleton sub-tree and move into it
-    copytree('skel', app_name)
-    os.chdir(app_name)
+    copytree('skel', app_path)
+    os.chdir(app_path)
     print(f'Current directory is "{os.getcwd()}"')
 
     # Create virtual environment
@@ -28,7 +33,14 @@ def webinst(app_name):
 
 if __name__ == '__main__':
     # Command line argument
-    if len(sys.argv) != 2:
-        print(f'Usage: {sys.argv[0]} <app_name>')
+    if len(sys.argv) < 3:
+        print(f"""\
+Usage: {sys.argv[0]} <dst_path> <app_name> [rest]
+Create the app_name subdirectory inside dst_path. If dst_path does not exist,
+the script will create it.
+""")
         exit(-1)
-    webinst(sys.argv[1])
+    rest = False
+    if len(sys.argv) > 3:
+        rest = sys.argv[1] == 'rest'
+    webinst(sys.argv[1], sys.argv[2], rest=rest)

@@ -13,11 +13,14 @@ flask-wtf) so that the application can be immediately run.
 Run the script with the following command :
 
 ``` console
-py webinst.py <my_app>
+py webinst.py <dst_path> <app_name> [rest]
 ```
 
-replacing `my_app` by the name of your application. This will create a `my_app`
-sub-directory: `cd` into it, activate the virtual environment, and you can run
-`flask run`. The application front-end is at `localhost:5000`.
+where `dst_path` is the directory where the application code will be found,
+`app_name` is the application name, and `rest` is an optional parameter
+indicating where the application will expose a REST API.
 
-
+Running this script will create an `app_name` sub-directory under `dst_path`
+(creating the `dst_path` directory itself, if it does not exist) : `cd` into
+it, activate the virtual environment, and you can run `flask run`. The
+application front-end can be found at `localhost:5000`.
