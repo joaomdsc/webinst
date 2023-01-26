@@ -1,3 +1,3 @@
-# foobar.py: Main application module
+# app.py: Main application module
 
 from app import app
