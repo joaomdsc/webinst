@@ -6,8 +6,24 @@ from venv import EnvBuilder
 from shutil import copytree
 from subprocess import run, PIPE, STDOUT
 
+def expanduser(path):
+    r"""Expand ~ using HOME instead of Windows-specific stuff.
+
+    The standard os.path.expanduser() replaces my ~ with
+    C:\Users\joao.moreira.INV, but I have defined a different HOME
+    variable that I want to use. 
+    """
+    if path.startswith('~'):
+        # Remove '~/', not just '~', to avoid an absolute path, otherwise the
+        # HOME segment will be ignored.
+        return os.path.join(os.getenv('HOME'), path[2:])
+    return path
+
 def webinst(dst_path, app_name, rest=False):
     # app_path is the directory that will hold the app
+    dst_path = expanduser(dst_path)
+    print(f'dst_path={dst_path}')
+    
     if not os.path.isdir(dst_path):
         os.makedirs(dst_path)
     app_path = os.path.join(dst_path, app_name)
