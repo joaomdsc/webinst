@@ -46,8 +46,7 @@ Usage: {sys.argv[0]} <dst_path> <app_name> [rest]
 
 Create the app_name subdirectory inside dst_path. If dst_path does not exist,
 the script will create it. If rest is set, generate a different app skeleton
-that uses the connexion module to offer a swagger description of a REST API.
-
+that uses the connexion module to offer a swagger description of a REST API.\
 """)
         exit(-1)
     rest = False
